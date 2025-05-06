@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 
-export default function TransactionDashboard() {
+export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
 
@@ -44,7 +44,7 @@ export default function TransactionDashboard() {
               <Zap className="h-4 w-4 text-amber-500" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground">Total Transaction</p>
+              <p className="text-xs text-muted-foreground">Total Orders</p>
               <h3 className="text-xl font-bold">256K</h3>
             </div>
           </CardContent>
@@ -78,9 +78,9 @@ export default function TransactionDashboard() {
       {/* Transactions Section */}
       <div className="bg-white rounded-lg border p-6 space-y-6">
         <div>
-          <h2 className="text-xl font-semibold">All Transactions</h2>
+          <h2 className="text-xl font-semibold">All Orders</h2>
           <p className="text-xs text-muted-foreground">
-            List of all transaction records
+            List of all orders made by users
           </p>
         </div>
 
@@ -137,7 +137,6 @@ export default function TransactionDashboard() {
                 <TableHead>Product</TableHead>
                 <TableHead>Total Payment</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead>Payment</TableHead>
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
@@ -146,7 +145,9 @@ export default function TransactionDashboard() {
                 <TableRow
                   key={transaction.id}
                   className="cursor-pointer hover:bg-gray-50"
-                  onClick={() => router.push(`/dashboard/detail-order`)}
+                  onClick={() =>
+                    router.push(`/dashboard/producer/orders/detail`)
+                  }
                 >
                   <TableCell className="text-xs">
                     {transaction.orderNo}
@@ -158,9 +159,6 @@ export default function TransactionDashboard() {
                     {transaction.totalPayment}
                   </TableCell>
                   <TableCell className="text-xs">{transaction.date}</TableCell>
-                  <TableCell className="text-xs">
-                    {transaction.payment}
-                  </TableCell>
                   <TableCell>
                     <StatusBadge status={transaction.status} />
                   </TableCell>
@@ -217,15 +215,11 @@ export default function TransactionDashboard() {
   );
 }
 
-function StatusBadge({
-  status,
-}: {
-  status: "approved" | "rejected" | "pending";
-}) {
-  if (status === "approved") {
+function StatusBadge({ status }: { status: "paid" | "rejected" | "pending" }) {
+  if (status === "paid") {
     return (
       <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
-        Approved
+        Paid
       </Badge>
     );
   }
@@ -238,7 +232,7 @@ function StatusBadge({
   }
   return (
     <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
-      Need Action
+      Pending
     </Badge>
   );
 }
@@ -292,7 +286,7 @@ const transactions = [
     totalPayment: "$500,000",
     date: "2025-04-30",
     payment: "Credit Card",
-    status: "rejected" as const,
+    status: "paid" as const,
   },
   {
     id: 4,
@@ -301,42 +295,6 @@ const transactions = [
     totalPayment: "$2,000",
     date: "2025-04-30",
     payment: "Credit Card",
-    status: "approved" as const,
-  },
-  {
-    id: 5,
-    orderNo: "INV-20240429-005",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$1,500,000",
-    date: "2025-04-29",
-    payment: "Bank Transfer",
-    status: "approved" as const,
-  },
-  {
-    id: 6,
-    orderNo: "INV-20240429-006",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$3,000",
-    date: "2025-04-29",
-    payment: "Bank Transfer",
-    status: "approved" as const,
-  },
-  {
-    id: 7,
-    orderNo: "INV-20240428-007",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$1,000,000",
-    date: "2025-04-28",
-    payment: "Bank Transfer",
-    status: "approved" as const,
-  },
-  {
-    id: 8,
-    orderNo: "INV-20240428-008",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$1,000",
-    date: "2025-04-28",
-    payment: "Bank Transfer",
-    status: "rejected" as const,
+    status: "paid" as const,
   },
 ];

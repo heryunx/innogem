@@ -2,9 +2,7 @@
 
 import * as React from "react";
 import {
-  IconCamera,
   IconDashboard,
-  IconFileAi,
   IconFileDescription,
   IconHelp,
   IconInnerShadowTop,
@@ -26,92 +24,65 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: IconDashboard,
-    },
+// Reusable sidebar props
+type AppSidebarProps = {
+  role: "user" | "producer" | "admin";
+} & React.ComponentProps<typeof Sidebar>;
+
+// Simulasi data navigasi per role
+const navItemsByRole = {
+  user: [
+    { title: "Dashboard", url: "/dashboard/user", icon: IconDashboard },
     {
       title: "Invoices",
-      url: "/dashboard/invoices",
+      url: "/dashboard/user/invoices",
+      icon: IconListDetails,
+    },
+  ],
+  producer: [
+    { title: "Dashboard", url: "/dashboard/producer", icon: IconDashboard },
+    {
+      title: "Orders",
+      url: "/dashboard/producer/orders",
       icon: IconListDetails,
     },
     {
-      title: "Inquiries",
-      url: "#",
-      icon: IconUsers,
+      title: "Products",
+      url: "/dashboard/producer/products",
+      icon: IconListDetails,
     },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/producer/settings",
       icon: IconSettings,
     },
+  ],
+  admin: [
+    { title: "Dashboard", url: "/dashboard/admin", icon: IconDashboard },
+    { title: "Manage Users", url: "/dashboard/admin/users", icon: IconUsers },
     {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
+      title: "Reports",
+      url: "/dashboard/admin/reports",
+      icon: IconFileDescription,
     },
+    { title: "Settings", url: "/dashboard/admin/settings", icon: IconSettings },
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+const navSecondary = [
+  { title: "Settings", url: "#", icon: IconSettings },
+  { title: "Get Help", url: "#", icon: IconHelp },
+];
+
+const mockUser = {
+  name: "shadcn",
+  email: "m@example.com",
+  avatar: "/avatars/shadcn.jpg",
+};
+
+export function AppSidebar({ role, ...props }: AppSidebarProps) {
+  const navMain = navItemsByRole[role];
+
   return (
     <Sidebar collapsible="offcanvas" {...props} className="bg-white">
       <SidebarHeader className="bg-white">
@@ -130,11 +101,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent className="bg-white">
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={navMain} />
+        <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter className="bg-white">
-        <NavUser user={data.user} />
+        <NavUser user={mockUser} />
       </SidebarFooter>
     </Sidebar>
   );

@@ -3,8 +3,13 @@
 import type React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import CustomsEntryDialog from "@/components/layout/dashboard/customs-dialog";
+import { Eye } from "lucide-react";
 
 export default function OrderDetail() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="container mx-auto py-4 px-4 space-y-6 font-sans text-base">
       {/* Timeline */}
@@ -41,8 +46,8 @@ export default function OrderDetail() {
 
       {/* Order Info */}
       <Card className="bg-white">
-        <CardContent className="p-4 sm:p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CardContent className="p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-4">
               <InfoItem label="No Order" value="121XXX2025" />
               <InfoItem label="Customer" value="John Doe" />
@@ -70,57 +75,69 @@ export default function OrderDetail() {
               <InfoItem label="Dimension" value="30 x 30 x 9 CM" />
             </div>
           </div>
+          <Separator className="my-2" />
+          <div className="w-full flex gap-4 justify-center sm:justify-end mt-4">
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={() => setOpen(true)}
+            >
+              <Eye className="h-4 w-4" />
+              View Documents
+            </Button>
+            <CustomsEntryDialog open={open} setOpen={setOpen} />
+            <Button variant="outline" className="">
+              Download Invoice
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
       {/* Items Detail */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-bold">Items Detail</h2>
-        <Card className="bg-white">
-          <CardContent className="p-0">
-            <div className="w-full">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                      Product
-                    </th>
-                    <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                      Qty
-                    </th>
-                    <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                      Price
-                    </th>
-                    <th className="text-right p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                      Subtotal
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <ItemRow />
-                  <ItemRow />
-                </tbody>
-              </table>
+      <Card className="bg-white">
+        <CardContent className="p-4">
+          <h2 className="text-xl font-bold">Items Detail</h2>
+          <div className="w-full">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
+                    Product
+                  </th>
+                  <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
+                    Qty
+                  </th>
+                  <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
+                    Price
+                  </th>
+                  <th className="text-right p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
+                    Subtotal
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ItemRow />
+                <ItemRow />
+              </tbody>
+            </table>
+          </div>
+          <div className="p-3 sm:p-4 space-y-2">
+            <div className="flex justify-between text-xs sm:text-sm">
+              <span className="font-medium">Subtotal Order</span>
+              <span className="font-medium">$3,200,000</span>
             </div>
-            <Separator className="my-4 border-dashed" />
-            <div className="p-3 sm:p-4 space-y-2">
-              <div className="flex justify-between text-xs sm:text-sm">
-                <span className="font-medium">Subtotal Order</span>
-                <span className="font-medium">$3,200,000</span>
-              </div>
-              <div className="flex justify-between text-xs sm:text-sm">
-                <span className="font-medium">Fees $ Charges</span>
-                <span className="font-medium">$200,000</span>
-              </div>
-              <Separator className="my-2" />
-              <div className="flex justify-between text-sm sm:text-base">
-                <span className="font-bold">Total Order</span>
-                <span className="font-bold">$3,000,000</span>
-              </div>
+            <div className="flex justify-between text-xs sm:text-sm">
+              <span className="font-medium">Fees $ Charges</span>
+              <span className="font-medium">$200,000</span>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <Separator className="my-2" />
+            <div className="flex justify-between text-sm sm:text-base">
+              <span className="font-bold">Total Order</span>
+              <span className="font-bold">$3,000,000</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

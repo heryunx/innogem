@@ -1,6 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { SiteHeader } from "@/components/site-header";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function DashboardLayout({
   children,
@@ -16,11 +14,7 @@ export default function DashboardLayout({
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" />
-      <SidebarInset className="bg-[#FAFBFF] px-4">
-        <SiteHeader />
-        <div className="bg-[#FAFBFF] flex flex-1 flex-col">{children}</div>
-      </SidebarInset>
+      {children}
     </SidebarProvider>
   );
 }

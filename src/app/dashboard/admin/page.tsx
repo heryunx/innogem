@@ -16,7 +16,7 @@ export default function SalesDashboard() {
   const [selectedMonth, setSelectedMonth] = useState("February");
 
   return (
-    <div className="container mx-auto py-4">
+    <div className="container mx-auto p-6 max-w-7xl">
       <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
         <div className="flex justify-between items-center mb-4">
           <div>

@@ -3,12 +3,15 @@
 import * as React from "react";
 import {
   IconDashboard,
-  IconFileDescription,
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
   IconSettings,
   IconUsers,
+  IconMenuOrder,
+  IconBrandCodesandbox,
+  IconTransactionDollar,
+  IconTruckDelivery,
 } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -26,7 +29,7 @@ import {
 
 // Reusable sidebar props
 type AppSidebarProps = {
-  role: "user" | "producer" | "admin";
+  role: "user" | "producer" | "admin" | "logistic";
 } & React.ComponentProps<typeof Sidebar>;
 
 // Simulasi data navigasi per role
@@ -44,28 +47,44 @@ const navItemsByRole = {
     {
       title: "Orders",
       url: "/dashboard/producer/orders",
-      icon: IconListDetails,
+      icon: IconTransactionDollar,
     },
     {
       title: "Products",
       url: "/dashboard/producer/products",
       icon: IconListDetails,
     },
-    {
-      title: "Settings",
-      url: "/dashboard/producer/settings",
-      icon: IconSettings,
-    },
   ],
   admin: [
     { title: "Dashboard", url: "/dashboard/admin", icon: IconDashboard },
-    { title: "Manage Users", url: "/dashboard/admin/users", icon: IconUsers },
     {
-      title: "Reports",
-      url: "/dashboard/admin/reports",
-      icon: IconFileDescription,
+      title: "Products",
+      url: "/dashboard/admin/products",
+      icon: IconBrandCodesandbox,
     },
-    { title: "Settings", url: "/dashboard/admin/settings", icon: IconSettings },
+    {
+      title: "Producer",
+      url: "/dashboard/admin/producers",
+      icon: IconUsers,
+    },
+    {
+      title: "Buyer",
+      url: "/dashboard/admin/buyers",
+      icon: IconUsers,
+    },
+  ],
+  logistic: [
+    { title: "Dashboard", url: "/dashboard/logistic", icon: IconDashboard },
+    {
+      title: "Shipment",
+      url: "/dashboard/logistic/shipment",
+      icon: IconTruckDelivery,
+    },
+    {
+      title: "Invoice",
+      url: "/dashboard/logistic/products",
+      icon: IconListDetails,
+    },
   ],
 };
 

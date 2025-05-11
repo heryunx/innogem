@@ -4,10 +4,14 @@ import { useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
+  CheckCircle2,
+  FileOutput,
   Search,
+  Zap,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -25,7 +29,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
-import SummaryCards from "@/components/layout/dashboard/summary-cards";
 
 export default function Page() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,19 +37,50 @@ export default function Page() {
   return (
     <div className="container mx-auto py-4 space-y-4 font-sans text-base">
       {/* Summary Cards */}
-      <SummaryCards
-        title="Orders"
-        valuetotal={1902}
-        valueapproved={1200}
-        valuerejected={89}
-      />
+      <div className="grid grid-cols-3 gap-4">
+        <Card>
+          <CardContent className="flex items-center gap-4 p-4">
+            <div className="h-8 w-8 rounded-full bg-amber-50 flex items-center justify-center">
+              <Zap className="h-4 w-4 text-amber-500" />
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">Total Shipment</p>
+              <h3 className="text-xl font-bold">256K</h3>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="flex items-center gap-4 p-4">
+            <div className="h-4 w-4 rounded-full bg-green-50 flex items-center justify-center">
+              <CheckCircle2 className="h-6 w-6 text-green-500" />
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">Approved</p>
+              <h3 className="text-xl font-bold">255K</h3>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="flex items-center gap-4 p-4">
+            <div className="h-4 w-4 rounded-full bg-red-50 flex items-center justify-center">
+              <FileOutput className="h-6 w-6 text-red-400" />
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">Rejected</p>
+              <h3 className="text-xl font-bold">1K</h3>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Transactions Section */}
       <div className="bg-white rounded-lg border p-6 space-y-6">
         <div>
-          <h2 className="text-xl font-semibold">All Orders</h2>
+          <h2 className="text-xl font-semibold">All Shipment</h2>
           <p className="text-xs text-muted-foreground">
-            List of all orders made by users
+            List of all shipment records
           </p>
         </div>
 
@@ -99,34 +133,53 @@ export default function Page() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>No Invoice</TableHead>
+                <TableHead>Shipment ID</TableHead>
                 <TableHead>Product</TableHead>
-                <TableHead>Total Payment</TableHead>
-                <TableHead>Date</TableHead>
+                <TableHead>Route</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Dates</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Approval</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {transactions.map((transaction) => (
+              {transactions.map((shipment) => (
                 <TableRow
-                  key={transaction.id}
+                  key={shipment.id}
                   className="cursor-pointer hover:bg-gray-50"
-                  onClick={() =>
-                    router.push(`/dashboard/producer/orders/detail`)
-                  }
+                  onClick={() => router.push(`/dashboard/logistic/shipment/detail`)}
                 >
-                  <TableCell className="text-xs">
-                    {transaction.orderNo}
+                  <TableCell className="font-medium">
+                    {shipment.shipmentId}
                   </TableCell>
-                  <TableCell className="text-xs">
-                    {transaction.product}
+                  <TableCell className="text-sm">
+                    <div className="font-semibold">{shipment.product}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {shipment.company}
+                    </div>
                   </TableCell>
-                  <TableCell className="text-xs">
-                    {transaction.totalPayment}
+                  <TableCell className="text-sm">
+                    <div>📍 {shipment.routeFrom}</div>
+                    <div>📍 {shipment.routeTo}</div>
                   </TableCell>
-                  <TableCell className="text-xs">{transaction.date}</TableCell>
+                  <TableCell className="text-sm">{shipment.type}</TableCell>
+                  <TableCell className="text-sm">
+                    <div>📅 {shipment.departure}</div>
+                    <div>🕒 {shipment.arrival}</div>
+                  </TableCell>
                   <TableCell>
-                    <StatusBadge status={transaction.status} />
+                    <Badge className="bg-black text-white">In Transit</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge className="bg-green-100 text-green-700">
+                      Approved
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Button variant="outline" size="sm">
+                      Update Location
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -229,38 +282,28 @@ function PaginationButton({
 const transactions = [
   {
     id: 1,
-    orderNo: "INV-20240501-001",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$1,000,000",
-    date: "2025-05-01",
-    payment: "Bank Transfer",
-    status: "pending" as const,
+    shipmentId: "SHP-2023-1234",
+    product: "Organic Coffee Beans",
+    company: "Eco Beans BV",
+    routeFrom: "Jakarta, Indonesia",
+    routeTo: "Rotterdam, Netherlands",
+    type: "CIF",
+    departure: "March 28, 2024",
+    arrival: "April 15, 2024",
+    status: "in_transit",
+    approval: "approved",
   },
   {
     id: 2,
-    orderNo: "INV-20240501-002",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$1,000",
-    date: "2025-05-01",
-    payment: "Credit Card",
-    status: "rejected" as const,
-  },
-  {
-    id: 3,
-    orderNo: "INV-20240501-003",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$500,000",
-    date: "2025-04-30",
-    payment: "Credit Card",
-    status: "paid" as const,
-  },
-  {
-    id: 4,
-    orderNo: "INV-20240430-004",
-    product: "Kacang Mayasi Internasional",
-    totalPayment: "$2,000",
-    date: "2025-04-30",
-    payment: "Credit Card",
-    status: "paid" as const,
+    shipmentId: "SHP-2023-1089",
+    product: "Wooden Handicrafts",
+    company: "Amsterdam Home Goods",
+    routeFrom: "Surabaya, Indonesia",
+    routeTo: "Amsterdam, Netherlands",
+    type: "FOB",
+    departure: "March 25, 2024",
+    arrival: "April 12, 2024",
+    status: "in_transit",
+    approval: "approved",
   },
 ];

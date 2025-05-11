@@ -4,15 +4,27 @@ import type React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import CustomsEntryDialog from "@/components/layout/dashboard/customs-dialog";
 import { Eye } from "lucide-react";
 
-export default function OrderDetail() {
+export default function Page() {
   const [open, setOpen] = useState(false);
+  const [isApproved, setIsApproved] = useState(false);
+  const [invoiceDialogOpen, setInvoiceDialogOpen] = useState(false);
+
   return (
-    <div className="container mx-auto py-4 px-4 space-y-6 font-sans text-base">
-      {/* Timeline */}
+    <div className="container mx-auto py-4 space-y-4 font-sans text-base">
+      {/* Need Action Card */}
       <Card className="bg-white">
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4 justify-between sm:items-center">
@@ -22,45 +34,42 @@ export default function OrderDetail() {
                 You must take action immediately.
               </p>
             </div>
-
-            <div className="flex flex-wrap gap-3 justify-end ">
-              <Button variant="outline" className="bg-gray-50">
-                Back
-              </Button>
-              <Button variant="outline" className="bg-gray-50">
-                Negoitbale
-              </Button>
-              <Button variant="outline" className="bg-gray-50">
-                Reject
-              </Button>
-              <Button className="bg-indigo-600 hover:bg-indigo-700">
-                Aprove
-              </Button>
+            <div className="flex flex-wrap gap-3 justify-end">
+              {!isApproved ? (
+                <>
+                  <Button variant="outline" className="bg-gray-50">
+                    Reject
+                  </Button>
+                  <Button
+                    className="bg-indigo-600 hover:bg-indigo-700"
+                    onClick={() => setIsApproved(true)}
+                  >
+                    Approve
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  className="bg-purple-600 hover:bg-purple-700"
+                  onClick={() => setInvoiceDialogOpen(true)}
+                >
+                  Send Invoice
+                </Button>
+              )}
             </div>
           </div>
         </CardContent>
       </Card>
+
+      {/* Timeline */}
       <Card className="bg-white">
         <CardContent className="p-4 sm:p-6">
           <div className="relative">
             <div className="absolute top-1.5 sm:top-2 left-0 right-0 h-0.5 bg-gray-200 z-0 mx-[10%]"></div>
             <div className="flex justify-between items-start gap-1 sm:gap-4">
               {[
-                {
-                  label: "Quote",
-                  date: "Wed, 1 Ith Jan",
-                  active: true,
-                },
-                {
-                  label: "Payment",
-                  date: "Wed, 3 Ith Jan",
-                  active: true,
-                },
-                {
-                  label: "Shipment",
-                  date: "Wed, 10 Ith Jan",
-                  active: true,
-                },
+                { label: "Quote", date: "Wed, 1 Ith Jan", active: true },
+                { label: "Payment", date: "Wed, 3 Ith Jan", active: true },
+                { label: "Shipment", date: "Wed, 10 Ith Jan", active: true },
                 { label: "Shipped", date: "Wed, 19 Ith Jan", active: false },
                 { label: "Completed", date: "Wed, 20 Ith Jan", active: false },
               ].map((item, index) => (
@@ -113,9 +122,7 @@ export default function OrderDetail() {
               View Documents
             </Button>
             <CustomsEntryDialog open={open} setOpen={setOpen} />
-            <Button variant="outline" className="">
-              Download Invoice
-            </Button>
+            <Button variant="outline">Download Invoice</Button>
           </div>
         </CardContent>
       </Card>
@@ -124,47 +131,29 @@ export default function OrderDetail() {
       <Card className="bg-white">
         <CardContent className="p-4">
           <h2 className="text-xl font-bold">Items Detail</h2>
-          <div className="w-full">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                    Product
-                  </th>
-                  <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                    Qty
-                  </th>
-                  <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                    Price
-                  </th>
-                  <th className="text-right p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
-                    Subtotal
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <ItemRow />
-                <ItemRow />
-              </tbody>
-            </table>
-          </div>
-          <div className="p-3 sm:p-4 space-y-2">
-            <div className="flex justify-between text-xs sm:text-sm">
-              <span className="font-medium">Subtotal Order</span>
-              <span className="font-medium">$3,200,000</span>
-            </div>
-            <div className="flex justify-between text-xs sm:text-sm">
-              <span className="font-medium">Fees $ Charges</span>
-              <span className="font-medium">$200,000</span>
-            </div>
-            <Separator className="my-2" />
-            <div className="flex justify-between text-sm sm:text-base">
-              <span className="font-bold">Total Order</span>
-              <span className="font-bold">$3,000,000</span>
-            </div>
-          </div>
+          <table className="w-full">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
+                  Product
+                </th>
+                <th className="text-center p-3 sm:p-4 text-xs sm:text-sm font-medium text-muted-foreground">
+                  Qty
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <ItemRow />
+              <ItemRow />
+            </tbody>
+          </table>
         </CardContent>
       </Card>
+
+      <SendInvoiceDialog
+        open={invoiceDialogOpen}
+        setOpen={setInvoiceDialogOpen}
+      />
     </div>
   );
 }
@@ -181,12 +170,12 @@ function TimelinePoint({
   return (
     <div className="flex-1 min-w-0 flex flex-col items-center text-center px-1">
       <div
-        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full flex items-center justify-center z-10 ${
+        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full z-10 ${
           active ? "bg-[#5932EA]" : "bg-gray-400"
         }`}
       ></div>
       <p
-        className={`mt-1 text-xs sm:text-sm font-medium break-words ${
+        className={`mt-1 text-xs sm:text-sm font-medium ${
           active ? "text-[#5932EA]" : "text-gray-500"
         }`}
       >
@@ -216,15 +205,55 @@ function ItemRow() {
     <tr className="border-b">
       <td className="p-3 sm:p-4">
         <div className="flex items-center gap-2 sm:gap-4">
-          <div className="h-12 w-12 sm:h-16 sm:w-16 bg-gray-200 flex items-center justify-center flex-shrink-0">
+          <div className="h-12 w-12 sm:h-16 sm:w-16 bg-gray-200 flex items-center justify-center">
             <span className="text-xs text-gray-500">Image</span>
           </div>
           <span className="text-xs sm:text-sm">Product Name 1</span>
         </div>
       </td>
       <td className="p-3 sm:p-4 text-center text-xs sm:text-sm">X 1</td>
-      <td className="p-3 sm:p-4 text-center text-xs sm:text-sm">1000</td>
-      <td className="p-3 sm:p-4 text-right text-xs sm:text-sm">$1,200</td>
     </tr>
+  );
+}
+
+function SendInvoiceDialog({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: (value: boolean) => void;
+}) {
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Send Invoice</DialogTitle>
+          <DialogDescription>
+            Send invoice to the client for this shipment.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 mt-2">
+          <div>
+            <label className="block text-sm font-medium">Recipient</label>
+            <Input defaultValue="john.doe@example.com" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Amount</label>
+            <Input defaultValue="$1,250.00" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Due Date</label>
+            <Input type="date" defaultValue="2024-05-15" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Message</label>
+            <Textarea defaultValue="Please find attached the invoice for your recent shipment." />
+          </div>
+        </div>
+        <div className="flex justify-end pt-4">
+          <Button onClick={() => setOpen(false)}>Send Invoice</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -21,6 +21,14 @@ import {
 } from "@/components/ui/select";
 import { PaginationButton } from "@/components/layout/dashboard/pagination-button";
 import { useRouter } from "next/navigation";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default function ProductManagement() {
   const router = useRouter();
@@ -75,30 +83,30 @@ export default function ProductManagement() {
 
           {/* Table */}
           <div className="overflow-x-auto rounded border">
-            <table className="w-full border-collapse min-w-[700px] text-sm">
-              <thead>
-                <tr className="border-b text-left bg-muted/50">
-                  <th className="py-3 px-3 font-medium text-muted-foreground">
+            <Table className="min-w-[700px] text-sm">
+              <TableHeader>
+                <TableRow className="bg-muted/50 text-left">
+                  <TableHead className="py-3 px-3 text-muted-foreground font-medium">
                     Product
-                  </th>
-                  <th className="py-3 px-3 font-medium text-muted-foreground">
+                  </TableHead>
+                  <TableHead className="py-3 px-3 text-muted-foreground font-medium">
                     Price
-                  </th>
-                  <th className="py-3 px-3 font-medium text-muted-foreground">
+                  </TableHead>
+                  <TableHead className="py-3 px-3 text-muted-foreground font-medium">
                     Stock
-                  </th>
-                  <th className="py-3 px-3 font-medium text-muted-foreground">
+                  </TableHead>
+                  <TableHead className="py-3 px-3 text-muted-foreground font-medium">
                     Status
-                  </th>
-                  <th className="py-3 px-3 font-medium text-muted-foreground">
+                  </TableHead>
+                  <TableHead className="py-3 px-3 text-muted-foreground font-medium">
                     Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {products.map((product) => (
-                  <tr key={product.id} className="border-b">
-                    <td className="py-3 px-3">
+                  <TableRow key={product.id} className="border-b">
+                    <TableCell className="py-3 px-3">
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-12 bg-gray-200 flex items-center justify-center rounded border">
                           <span className="text-xs text-gray-500">Image</span>
@@ -110,13 +118,17 @@ export default function ProductManagement() {
                           <p className="font-medium">{product.name}</p>
                         </div>
                       </div>
-                    </td>
-                    <td className="py-3 px-3 font-medium">${product.price}</td>
-                    <td className="py-3 px-3 font-medium">{product.stock}</td>
-                    <td className="py-3 px-3">
+                    </TableCell>
+                    <TableCell className="py-3 px-3 font-medium">
+                      ${product.price}
+                    </TableCell>
+                    <TableCell className="py-3 px-3 font-medium">
+                      {product.stock}
+                    </TableCell>
+                    <TableCell className="py-3 px-3">
                       <StatusBadge status={product.status} />
-                    </td>
-                    <td className="py-3 px-3">
+                    </TableCell>
+                    <TableCell className="py-3 px-3">
                       <div className="flex gap-2">
                         <Button
                           variant="outline"
@@ -133,11 +145,11 @@ export default function ProductManagement() {
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
 
           {/* Pagination */}

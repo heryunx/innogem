@@ -247,6 +247,29 @@ export default function DetailPage() {
                   ))}
                 </div>
               </div>
+              <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8">
+                <h2 className="text-lg mb-4">Customization Options</h2>
+
+                <div className="space-y-4 text-sm">
+                  {[
+                    ["Label Sticker", "Lead time 1 week"],
+                    [
+                      "Packaging Customization",
+                      "Lead time 2 weeks, minimum order 10000 pieces",
+                    ],
+                  ].map(([title, content], index) => (
+                    <div key={index}>
+                      <div className="flex flex-col sm:flex-row justify-between py-2 gap-2">
+                        <div className="font-medium">{title}</div>
+                        <div className="text-right text-gray-700">
+                          {content}
+                        </div>
+                      </div>
+                      <Separator />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Right Column */}

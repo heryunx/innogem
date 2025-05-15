@@ -7,7 +7,9 @@ import Image from "next/image";
 export default function ConfirmationPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const addressId = searchParams.get("address") || "address1";
+  const isSample = searchParams.get("type") === "sample";
 
   const products = [
     {
@@ -31,11 +33,12 @@ export default function ConfirmationPage() {
   ];
 
   const handleBack = () => {
-    router.push(`/checkout/shipping?address=${addressId}`);
+    const query = new URLSearchParams({ address: addressId });
+    if (isSample) query.append("type", "sample");
+    router.push(`/checkout/shipping?${query.toString()}`);
   };
 
   const handleComplete = () => {
-    // In a real app, you would submit the order to your backend
     alert("Purchase request submitted successfully!");
     router.push("/");
   };
@@ -46,7 +49,6 @@ export default function ConfirmationPage() {
         <h2 className="text-lg font-medium">Summary</h2>
 
         <div className="space-y-2">
-          {/* Product Items */}
           {products.map((product) => (
             <div
               key={product.id}
@@ -66,13 +68,11 @@ export default function ConfirmationPage() {
             </div>
           ))}
 
-          {/* Address */}
           <div className="mt-6">
             <h3 className="text-sm font-medium text-gray-500 mb-1">Address</h3>
             <p>1131 Dusty Townline, Jacksonville, TX 40322</p>
           </div>
 
-          {/* Shipment Method */}
           <div className="mt-2">
             <h3 className="text-sm font-medium text-gray-500 mb-1">
               Shipment method
@@ -80,7 +80,6 @@ export default function ConfirmationPage() {
             <p>FOB (Free On Board)</p>
           </div>
 
-          {/* Cost Breakdown */}
           <div className="space-y-2 mt-6 pt-4 border-t">
             <div className="flex justify-between">
               <span>Subtotal</span>
@@ -106,7 +105,6 @@ export default function ConfirmationPage() {
         </div>
       </div>
 
-      {/* Navigation Buttons */}
       <div className="flex justify-between gap-4 pt-2">
         <Button variant="outline" onClick={handleBack} className="flex-1 h-12">
           Back

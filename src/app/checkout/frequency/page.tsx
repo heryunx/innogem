@@ -32,6 +32,11 @@ export default function FrequencyPage() {
         className="space-y-4"
       >
         {[
+          {
+            id: "one-time",
+            label: "One-Time",
+            description: "One-time delivery",
+          },
           { id: "weekly", label: "Weekly", description: "Delivery every week" },
           {
             id: "biweekly",

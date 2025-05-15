@@ -1,18 +1,35 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+type Step = {
+  id: number;
+  name: string;
+  path: string;
+};
+
 export default function ProgressSteps() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const isSample = searchParams.get("type") === "sample";
 
-  const steps = [
+  const baseSteps: Step[] = [
     { id: 1, name: "Address", path: "/checkout/address" },
     { id: 2, name: "Frequency", path: "/checkout/frequency" },
     { id: 3, name: "Shipping", path: "/checkout/shipping" },
     { id: 4, name: "Confirmation", path: "/checkout/confirmation" },
   ];
+
+  // Jika sample, hilangkan step "Frequency" dan sesuaikan ID
+  const steps: Step[] = isSample
+    ? [
+        { id: 1, name: "Address", path: "/checkout/address" },
+        { id: 2, name: "Shipping", path: "/checkout/shipping" },
+        { id: 3, name: "Confirmation", path: "/checkout/confirmation" },
+      ]
+    : baseSteps;
 
   const getCurrentStepIndex = () => {
     const currentStep = steps.findIndex((step) => pathname.includes(step.path));
@@ -22,7 +39,7 @@ export default function ProgressSteps() {
   const currentStepIndex = getCurrentStepIndex();
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-center gap-10 sm:gap-20 items-center">
       {steps.map((step, index) => (
         <div
           key={step.id}
@@ -46,7 +63,7 @@ export default function ProgressSteps() {
               )}
             </div>
           </div>
-          <div className="flex flex-col justidy-center items-center mt-2">
+          <div className="flex flex-col justify-center items-center mt-2">
             <p
               className={cn(
                 "text-xs",

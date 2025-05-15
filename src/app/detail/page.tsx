@@ -90,7 +90,8 @@ export default function DetailPage() {
                   </Button>
                   <Button
                     onClick={() => router.push("checkout/address")}
-                    className="ml-4 flex-1 bg-black text-white hover:bg-black/90 text-sm"
+                    className="ml-4 flex-1 bg-black text-white hover:bg-black/90 text-sm hover:text-white hover:bg-black/90 cursor-pointer
+                    transition-colors duration-200 ease-in-out rounded-md h-10"
                   >
                     Send Inquiry
                   </Button>
@@ -99,8 +100,9 @@ export default function DetailPage() {
                 <div className="bg-neutral-100 p-4 rounded-lg flex justify-between items-center mt-4">
                   <p className="font-medium text-sm">Sample Price: $13.99</p>
                   <Button
+                    onClick={() => router.push("/checkout/address?type=sample")}
                     variant="secondary"
-                    className="bg-neutral-500 text-white hover:bg-neutral-600 text-sm"
+                    className="bg-neutral-500 text-white hover:bg-neutral-600 text-sm cursor-pointer"
                   >
                     Get Sample
                   </Button>
@@ -274,7 +276,31 @@ export default function DetailPage() {
 
             {/* Right Column */}
             <div className="w-full md:w-2/6">
-              <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 h-40 md:h-60"></div>
+              <div className="bg-white rounded-lg shadow-sm p-6 sm:p-8 h-auto">
+                <h2 className="text-lg mb-4">Related Products</h2>
+                <div className="space-y-4">
+                  {[1, 2, 3].map((item) => (
+                    <div key={item}>
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src="/images/placeholder-image.svg"
+                          alt={`Related Product ${item}`}
+                          width={80}
+                          height={80}
+                          className="object-cover w-20 h-20"
+                        />
+                        <div>
+                          <h3 className="text-sm font-medium">
+                            Product {item}
+                          </h3>
+                          <p className="text-sm text-neutral-600">$12.99</p>
+                        </div>
+                      </div>
+                      <Separator className="mt-4"/>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

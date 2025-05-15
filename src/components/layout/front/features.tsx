@@ -78,7 +78,7 @@ export default function Features() {
       ),
       title: "Sales & Marketing Strategy for Europe",
       description:
-        "Intelligent matching of buyers and suppliers based on needs, sector, and trade potential.",
+        "Helping businesses grow internationally through targeted market insights, B2B matchmaking, and localized marketing strategies.",
       iconBg: "#FF6B6B",
       href: "/front/sales",
     },

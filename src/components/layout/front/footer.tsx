@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/ui/front/button";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,8 +14,8 @@ export default function Footer() {
               <Image
                 src="/images/logo-1.png"
                 alt="Logo"
-                width={50}
-                height={50}
+                width={30}
+                height={30}
                 className=""
                 priority
               />
@@ -51,12 +52,12 @@ export default function Footer() {
               className="w-full sm:w-auto flex-grow py-3 px-5 rounded-full bg-transparent border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Email for newsletter subscription"
             />
-            <button
-              type="submit"
+            <Button
+              variant="primary"
               className="w-full sm:w-auto font-semibold px-8 py-3 rounded-full bg-gradient-to-r from-[#545AE7] to-[#393FCF] hover:opacity-90 transition-opacity"
             >
               Subscribe
-            </button>
+            </Button>
           </div>
         </form>
 

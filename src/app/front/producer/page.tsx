@@ -23,7 +23,7 @@ const services = [
     positionShort: "top-0",
     shortDescription:
       "Producers register their business and undergo Innogem’s verification process to ensure legitimacy and readiness for global trade.",
-    image: "/images/producer-register.jpg",
+    image: "/images/front/prod2.png",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const services = [
     positionShort: "bottom-0",
     shortDescription:
       "Once verified, producers can upload product listings, including specifications, images, certifications, and price details.",
-    image: "/images/producer-onboarding.jpg",
+    image: "/images/front/prod2.png",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const services = [
     positionShort: "top-0",
     shortDescription:
       "Producers receive quotation requests or purchase orders directly from verified buyers through the Innogem system.",
-    image: "/images/producer-orders.jpg",
+    image: "/images/front/prod2.png",
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const services = [
     positionShort: "bottom-0",
     shortDescription:
       "Innogem matches each order with logistics partners and provides the producer with pickup and delivery schedules.",
-    image: "/images/producer-logistics.jpg",
+    image: "/images/front/prod2.png",
   },
   {
     id: 5,
@@ -63,7 +63,7 @@ const services = [
     positionShort: "top-0",
     shortDescription:
       "After the buyer confirms receipt, Innogem releases payment to the producer’s designated account.",
-    image: "/images/producer-payment.jpg",
+    image: "/images/front/prod2.png",
   },
 ];
 

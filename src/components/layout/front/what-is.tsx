@@ -80,7 +80,7 @@ export default function WhatIsInnogem() {
                 trusted Indonesian producers.
               </p>
               <Button
-                href="/front/buyer"
+                href="#"
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-darken"
               >

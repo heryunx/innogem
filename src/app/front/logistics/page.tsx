@@ -20,14 +20,14 @@ export default function Page() {
         title="Integrated shipping, warehousing, and delivery"
         highlight="built into the platform"
         description="Producers no longer need to coordinate with multiple providers. Innogem’s logistics system automates pickup requests, connects with verified logistics companies, manages export documentation, and tracks shipments in real time — from the factory floor to the buyer’s door."
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/warehouse.jpg"
       />
 
       {/* Section 2 */}
       <DetailFeatureLeft
         title="Why logistics integration matters"
         highlight="for international trade"
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/international-trade.jpg"
         features={[
           {
             icon: (

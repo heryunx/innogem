@@ -3,7 +3,7 @@ import { Facebook, Twitter, Youtube, Instagram } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t bg-zinc-950 text-white py-12">
+    <footer className="w-full border-t bg-innogem-blue text-white py-12">
       <div className="container flex justify-center mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <h3 className="text-lg font-bold mb-4">Innogem</h3>

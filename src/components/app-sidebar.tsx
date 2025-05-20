@@ -8,10 +8,10 @@ import {
   IconListDetails,
   IconSettings,
   IconUsers,
-  IconMenuOrder,
   IconBrandCodesandbox,
   IconTransactionDollar,
   IconTruckDelivery,
+  IconCalculator,
 } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -58,6 +58,11 @@ const navItemsByRole = {
   admin: [
     { title: "Dashboard", url: "/dashboard/admin", icon: IconDashboard },
     {
+      title: "Orders",
+      url: "/dashboard/admin/orders",
+      icon: IconTransactionDollar,
+    },
+    {
       title: "Products",
       url: "/dashboard/admin/products",
       icon: IconBrandCodesandbox,
@@ -71,6 +76,11 @@ const navItemsByRole = {
       title: "Buyer",
       url: "/dashboard/admin/buyers",
       icon: IconUsers,
+    },
+    {
+      title: "Estimate Calculator",
+      url: "/dashboard/admin/estimate-calculator",
+      icon: IconCalculator,
     },
   ],
   logistic: [

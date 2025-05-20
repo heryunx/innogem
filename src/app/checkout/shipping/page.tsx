@@ -1,37 +1,15 @@
-"use client";
+// Tidak ada "use client"
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 export default function ShippingPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const addressId = searchParams.get("address") || "address1";
-  const frequency = searchParams.get("frequency") || "weekly";
-  const [shipping, setShipping] = useState<string>("standard");
-
-  const handleNext = () => {
-    router.push(
-      `/checkout/confirmation?address=${addressId}&frequency=${frequency}&shipping=${shipping}`
-    );
-  };
-
-  const handleBack = () => {
-    router.push(`/checkout/frequency?address=${addressId}`);
-  };
-
   return (
     <div className="space-y-6">
       <h2 className="text-lg font-medium">Select Shipping Method</h2>
 
-      <RadioGroup
-        value={shipping}
-        onValueChange={setShipping}
-        className="space-y-4"
-      >
+      <RadioGroup className="space-y-4">
         {[
           {
             id: "standard",
@@ -73,19 +51,12 @@ export default function ShippingPage() {
         ))}
       </RadioGroup>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons (hanya tampilan) */}
       <div className="flex justify-between pt-6">
-        <Button
-          variant="outline"
-          onClick={handleBack}
-          className="w-[180px] h-12"
-        >
+        <Button variant="outline" className="w-[180px] h-12">
           Back
         </Button>
-        <Button
-          onClick={handleNext}
-          className="w-[180px] h-12 bg-black hover:bg-gray-800"
-        >
+        <Button className="w-[180px] h-12 bg-black hover:bg-gray-800">
           Next
         </Button>
       </div>

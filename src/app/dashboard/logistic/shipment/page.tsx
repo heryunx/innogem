@@ -148,7 +148,9 @@ export default function Page() {
                 <TableRow
                   key={shipment.id}
                   className="cursor-pointer hover:bg-gray-50"
-                  onClick={() => router.push(`/dashboard/logistic/shipment/detail`)}
+                  onClick={() =>
+                    router.push(`/dashboard/logistic/shipment/detail`)
+                  }
                 >
                   <TableCell className="font-medium">
                     {shipment.shipmentId}
@@ -231,28 +233,6 @@ export default function Page() {
         </div>
       </div>
     </div>
-  );
-}
-
-function StatusBadge({ status }: { status: "paid" | "rejected" | "pending" }) {
-  if (status === "paid") {
-    return (
-      <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
-        Paid
-      </Badge>
-    );
-  }
-  if (status === "rejected") {
-    return (
-      <Badge className="bg-red-100 text-red-700 hover:bg-red-100">
-        Rejected
-      </Badge>
-    );
-  }
-  return (
-    <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
-      Pending
-    </Badge>
   );
 }
 

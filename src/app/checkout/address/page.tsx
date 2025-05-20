@@ -1,7 +1,4 @@
 "use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { RadioGroup } from "@/components/ui/radio-group";
 import { Plus } from "lucide-react";
@@ -9,12 +6,7 @@ import AddressCard from "@/components/address-card";
 import { addresses } from "@/lib/checkout-data";
 
 export default function AddressPage() {
-  const router = useRouter();
-  const [selectedAddress, setSelectedAddress] = useState<string>("address1");
-
-  const handleNext = () => {
-    router.push(`/checkout/frequency?address=${selectedAddress}`);
-  };
+  const selectedAddress = "address1"; // nilai default statis
 
   return (
     <div className="space-y-6">
@@ -22,15 +14,15 @@ export default function AddressPage() {
 
       <RadioGroup
         value={selectedAddress}
-        onValueChange={setSelectedAddress}
         className="space-y-4"
+        onValueChange={() => {}}
       >
         {addresses.map((address) => (
           <AddressCard
             key={address.id}
             address={address}
             isSelected={selectedAddress === address.id}
-            onSelect={() => setSelectedAddress(address.id)}
+            onSelect={() => {}}
           />
         ))}
       </RadioGroup>
@@ -51,19 +43,12 @@ export default function AddressPage() {
       </div>
       <div className="text-center text-sm">Add New Address</div>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons (hanya layout) */}
       <div className="flex justify-between pt-6">
-        <Button
-          variant="outline"
-          onClick={() => router.back()}
-          className="w-[180px] h-12"
-        >
+        <Button variant="outline" className="w-[180px] h-12">
           Back
         </Button>
-        <Button
-          onClick={handleNext}
-          className="w-[180px] h-12 bg-black hover:bg-gray-800"
-        >
+        <Button className="w-[180px] h-12 bg-black hover:bg-gray-800">
           Next
         </Button>
       </div>

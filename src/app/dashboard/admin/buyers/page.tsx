@@ -83,7 +83,6 @@ export default function ProducerManagement() {
                 <TableHead>PIC Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -101,17 +100,7 @@ export default function ProducerManagement() {
                   <TableCell>
                     <StatusBadge status={producer.status} />
                   </TableCell>
-                  <TableCell>
-                    <Button
-                      variant={
-                        producer.status === "pending" ? "default" : "outline"
-                      }
-                      size="sm"
-                      className="h-8 text-xs"
-                    >
-                      {producer.status === "pending" ? "Review" : "View"}
-                    </Button>
-                  </TableCell>
+                  
                 </TableRow>
               ))}
             </TableBody>

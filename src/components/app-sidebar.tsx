@@ -78,7 +78,7 @@ const navItemsByRole = {
       icon: IconUsers,
     },
     {
-      title: "Estimate Calculator",
+      title: "Estimate Cost",
       url: "/dashboard/admin/estimate-calculator",
       icon: IconCalculator,
     },

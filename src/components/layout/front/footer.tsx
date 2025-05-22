@@ -67,7 +67,7 @@ export default function Footer() {
           aria-label="Footer navigation"
         >
           <Link
-            href="/about-us"
+            href="/front/about-us"
             passHref
             className="hover:text-blue-300 transition-colors"
           >
@@ -77,7 +77,17 @@ export default function Footer() {
             |
           </span>
           <Link
-            href="#"
+            href="/front/impressum"
+            passHref
+            className="hover:text-blue-300 transition-colors"
+          >
+            Impressum
+          </Link>
+          <span className="text-gray-500" aria-hidden="true">
+            |
+          </span>
+          <Link
+            href="/front/privacy-policy"
             passHref
             className="hover:text-blue-300 transition-colors"
           >
@@ -87,7 +97,7 @@ export default function Footer() {
             |
           </span>
           <Link
-            href="#"
+            href="/front/terms"
             passHref
             className="hover:text-blue-300 transition-colors"
           >

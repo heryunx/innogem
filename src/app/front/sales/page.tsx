@@ -20,14 +20,14 @@ export default function Page() {
         title="Targeted Market Intelligence"
         highlight="for faster, smarter decisions"
         description="Innogem equips businesses with in-depth insights about European demand trends, buyer behaviors, and compliance requirements. This helps producers make informed decisions and enter markets with confidence."
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/sales-1.webp"
       />
 
       {/* Detail Feature Left */}
       <DetailFeatureLeft
         title="B2B Matchmaking & Localized Promotion"
         highlight="to drive real business outcomes"
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/sales-2.webp"
         features={[
           {
             icon: (

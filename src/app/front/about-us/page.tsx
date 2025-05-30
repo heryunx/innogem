@@ -166,7 +166,7 @@ export default function AboutUsPage() {
         </div>
 
         {/* CTA */}
-        <div className="bg-[#2F327D] mb-[-130px]">
+        <div className="bg-[#2F327D]">
           <div
             className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8"
             data-aos="zoom-in"

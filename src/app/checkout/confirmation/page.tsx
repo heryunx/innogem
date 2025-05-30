@@ -1,15 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function ConfirmationPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const addressId = searchParams.get("address") || "address1";
-  const isSample = searchParams.get("type") === "sample";
 
   const products = [
     {
@@ -31,12 +27,6 @@ export default function ConfirmationPage() {
       image: "/placeholder.svg?height=60&width=60",
     },
   ];
-
-  const handleBack = () => {
-    const query = new URLSearchParams({ address: addressId });
-    if (isSample) query.append("type", "sample");
-    router.push(`/checkout/shipping?${query.toString()}`);
-  };
 
   const handleComplete = () => {
     alert("Purchase request submitted successfully!");
@@ -106,7 +96,7 @@ export default function ConfirmationPage() {
       </div>
 
       <div className="flex justify-between gap-4 pt-2">
-        <Button variant="outline" onClick={handleBack} className="flex-1 h-12">
+        <Button variant="outline" className="flex-1 h-12">
           Back
         </Button>
         <Button

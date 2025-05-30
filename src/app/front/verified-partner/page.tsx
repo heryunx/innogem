@@ -18,13 +18,13 @@ export default function Page() {
         title="Work with trusted companies"
         highlight="through our Verified Partner Ecosystem"
         description="Innogem ensures that all partners — from producers and buyers to logistics and financial service providers — are carefully screened and verified. This creates a secure, high-trust environment for cross-border transactions, reducing risks and ensuring quality and compliance on both sides."
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/verified-partner.jpg"
       />
 
       <DetailFeatureLeft
         title="Why verification matters"
         highlight="in global B2B trading"
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/b2btrading.webp"
         features={[
           {
             icon: (

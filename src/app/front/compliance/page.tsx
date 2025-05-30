@@ -20,14 +20,14 @@ export default function Page() {
         title="Compliance built into every trade"
         highlight="no surprises, no delays"
         description="From product classification to documentation and customs procedures, Innogem automates and simplifies regulatory requirements. Our platform keeps you updated on the latest trade rules between Indonesia and Europe, so you can focus on growing your business, not dealing with red tape."
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/compliance-1.webp"
       />
 
       {/* Detail Feature Left with Points */}
       <DetailFeatureLeft
         title="Why regulatory support is essential"
         highlight="in international trade"
-        imageSrc="/images/front/prod2.jpg"
+        imageSrc="/images/front/compliance-2.webp"
         features={[
           {
             icon: (

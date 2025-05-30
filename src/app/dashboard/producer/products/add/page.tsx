@@ -8,7 +8,6 @@ import {
   ExternalLink,
   Package,
   Plus,
-  Ship,
   Upload,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -60,7 +60,7 @@ export default function WhatIsInnogem() {
           {/* Card For Buyers */}
           <div className="relative rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition duration-300 h-[280px] group">
             <Image
-              src="/images/front/importer.png"
+              src="/images/front/buyer.jpg"
               alt="For Buyers"
               fill
               style={{ objectFit: "cover" }}
@@ -80,7 +80,7 @@ export default function WhatIsInnogem() {
                 trusted Indonesian producers.
               </p>
               <Button
-                href="/front/buyer"
+                href="#"
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-darken"
               >

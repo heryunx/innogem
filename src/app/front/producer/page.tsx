@@ -2,11 +2,11 @@ import Footer from "@/components/layout/front/footer";
 import Hero from "@/components/layout/front/hero";
 import ServiceList from "@/components/layout/front/service-list";
 import {
-  Blocks,
-  Component,
-  FlaskConical,
-  Signal,
-  Waypoints,
+  DollarSign,
+  ShoppingCart,
+  TicketsPlane,
+  Truck,
+  UserRoundPlus,
 } from "lucide-react";
 
 const title = {
@@ -19,51 +19,51 @@ const services = [
     id: 1,
     title: "Producer Registration & Verification",
     short: "Registration",
-    icon: <Waypoints size={25} color="#facc15" />,
+    icon: <UserRoundPlus size={25} color="#facc15" />,
     positionShort: "top-0",
     shortDescription:
       "Producers register their business and undergo Innogem’s verification process to ensure legitimacy and readiness for global trade.",
-    image: "/images/front/prod2.png",
+    image: "/images/front/registration.png",
   },
   {
     id: 2,
     title: "Product Onboarding",
     short: "Onboarding",
-    icon: <Component size={25} color="#f59e0b" />,
+    icon: <TicketsPlane size={25} color="#f59e0b" />,
     positionShort: "bottom-0",
     shortDescription:
       "Once verified, producers can upload product listings, including specifications, images, certifications, and price details.",
-    image: "/images/front/prod2.png",
+    image: "/images/front/onboarding.png",
   },
   {
     id: 3,
     title: "Quotation & Order Management",
     short: "Orders",
-    icon: <FlaskConical size={25} color="#facc15" />,
+    icon: <ShoppingCart size={25} color="#facc15" />,
     positionShort: "top-0",
     shortDescription:
       "Producers receive quotation requests or purchase orders directly from verified buyers through the Innogem system.",
-    image: "/images/front/prod2.png",
+    image: "/images/front/shopping.png",
   },
   {
     id: 4,
     title: "Logistics Coordination",
     short: "Shipping",
-    icon: <Blocks size={25} color="#f59e0b" />,
+    icon: <Truck size={25} color="#f59e0b" />,
     positionShort: "bottom-0",
     shortDescription:
       "Innogem matches each order with logistics partners and provides the producer with pickup and delivery schedules.",
-    image: "/images/front/prod2.png",
+    image: "/images/front/logistic.jpg",
   },
   {
     id: 5,
     title: "Payment Tracking & Settlement",
     short: "Payment",
-    icon: <Signal size={25} color="#facc15" />,
+    icon: <DollarSign size={25} color="#facc15" />,
     positionShort: "top-0",
     shortDescription:
       "After the buyer confirms receipt, Innogem releases payment to the producer’s designated account.",
-    image: "/images/front/prod2.png",
+    image: "/images/front/payment.jpg",
   },
 ];
 

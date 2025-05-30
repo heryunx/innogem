@@ -1,8 +1,8 @@
 import type React from "react";
 import type { Metadata } from "next";
 import ProgressSteps from "@/components/progress-steps";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/shop/navbar";
+import { Footer } from "@/components/layout/shop/footer";
 
 export const metadata: Metadata = {
   title: "Checkout",

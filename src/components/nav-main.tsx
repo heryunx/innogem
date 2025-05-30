@@ -32,8 +32,8 @@ export function NavMain({
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   tooltip={item.title}
-                  className={`hover:bg-[#5932EA] hover:text-white ${
-                    isActive ? "bg-[#5932EA] text-white" : ""
+                  className={`hover:bg-innogem-dark-green hover:text-white ${
+                    isActive ? "bg-innogem-green text-white" : ""
                   }`}
                 >
                   <Link

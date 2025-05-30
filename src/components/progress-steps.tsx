@@ -1,42 +1,24 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Step = {
   id: number;
   name: string;
-  path: string;
 };
 
 export default function ProgressSteps() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const isSample = searchParams.get("type") === "sample";
-
-  const baseSteps: Step[] = [
-    { id: 1, name: "Address", path: "/checkout/address" },
-    { id: 2, name: "Frequency", path: "/checkout/frequency" },
-    { id: 3, name: "Shipping", path: "/checkout/shipping" },
-    { id: 4, name: "Confirmation", path: "/checkout/confirmation" },
+  // Contoh langkah statis (default non-sample)
+  const steps: Step[] = [
+    { id: 1, name: "Address" },
+    { id: 2, name: "Frequency" },
+    { id: 3, name: "Shipping" },
+    { id: 4, name: "Confirmation" },
   ];
 
-  // Jika sample, hilangkan step "Frequency" dan sesuaikan ID
-  const steps: Step[] = isSample
-    ? [
-        { id: 1, name: "Address", path: "/checkout/address" },
-        { id: 2, name: "Shipping", path: "/checkout/shipping" },
-        { id: 3, name: "Confirmation", path: "/checkout/confirmation" },
-      ]
-    : baseSteps;
-
-  const getCurrentStepIndex = () => {
-    const currentStep = steps.findIndex((step) => pathname.includes(step.path));
-    return currentStep !== -1 ? currentStep : 0;
-  };
-
-  const currentStepIndex = getCurrentStepIndex();
+  // Contoh current step index statis (misal step ke-2 aktif)
+  const currentStepIndex = 1;
 
   return (
     <div className="flex justify-center gap-10 sm:gap-20 items-center">

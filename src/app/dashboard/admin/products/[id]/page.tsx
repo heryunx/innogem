@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Edit, Trash2, Star } from "lucide-react";
+import { ArrowLeft, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -141,7 +141,11 @@ export default function ProductDetail() {
                   </p>
                   <h2 className="text-2xl font-bold">{product.name}</h2>
                 </div>
-                <StatusBadge status={product.status} />
+                <StatusBadge
+                  status={
+                    product.status as "published" | "rejected" | "pending"
+                  }
+                />
               </div>
 
               <div className="text-3xl font-bold">${product.price}</div>

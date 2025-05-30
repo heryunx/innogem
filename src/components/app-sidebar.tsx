@@ -3,19 +3,17 @@
 import * as React from "react";
 import {
   IconDashboard,
-  IconHelp,
   IconInnerShadowTop,
   IconListDetails,
-  IconSettings,
   IconUsers,
   IconBrandCodesandbox,
   IconTransactionDollar,
   IconTruckDelivery,
   IconCalculator,
+  IconSettings,
 } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
@@ -37,9 +35,14 @@ const navItemsByRole = {
   user: [
     { title: "Dashboard", url: "/dashboard/user", icon: IconDashboard },
     {
-      title: "Invoices",
+      title: "My Invoices",
       url: "/dashboard/user/invoices",
       icon: IconListDetails,
+    },
+    {
+      title: "Settings",
+      url: "/dashboard/user/settings",
+      icon: IconSettings,
     },
   ],
   producer: [
@@ -98,11 +101,6 @@ const navItemsByRole = {
   ],
 };
 
-const navSecondary = [
-  { title: "Settings", url: "#", icon: IconSettings },
-  { title: "Get Help", url: "#", icon: IconHelp },
-];
-
 const mockUser = {
   name: "shadcn",
   email: "m@example.com",
@@ -131,7 +129,6 @@ export function AppSidebar({ role, ...props }: AppSidebarProps) {
       </SidebarHeader>
       <SidebarContent className="bg-white">
         <NavMain items={navMain} />
-        <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter className="bg-white">
         <NavUser user={mockUser} />

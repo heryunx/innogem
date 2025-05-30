@@ -1,21 +1,47 @@
 "use client";
 
-import { useState } from "react";
-import { Footer } from "@/components/layout/shop/footer";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+
 import { Navbar } from "@/components/layout/shop/navbar";
+import { Footer } from "@/components/layout/shop/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import { toast } from "sonner";
+import { signIn } from "next-auth/react";
+import { useProfileStore } from "@/stores/useProfileStore";
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState<"buyer" | "producer">("buyer");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle login with activeTab role here
-    console.log("Logging in as:", activeTab);
+  const router = useRouter();
+  const { fetchProfile } = useProfileStore();
+
+  const onSubmit = async (data: FormValues) => {
+    const res = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (res?.error) {
+      toast.error("Login failed. Please check your credentials.");
+    } else if (res?.ok) {
+      await fetchProfile();
+      router.push("/");
+    }
   };
 
   return (
@@ -24,40 +50,15 @@ export default function LoginPage() {
       <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
         <div className="w-full max-w-sm md:max-w-3xl">
           <div className="flex flex-col gap-6">
-            {/* Card */}
             <Card className="overflow-hidden p-0">
               <CardContent className="grid p-0 md:grid-cols-2">
-                <form onSubmit={handleLogin} className="p-6 md:p-8">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
                   <div className="flex flex-col gap-6">
-                    <div className="flex flex-col items-center text-center">
-                      <h1 className="text-2xl font-bold">Welcome back</h1>
-                      <p className="text-muted-foreground text-balance">
-                        Login to your {activeTab} account
+                    <div className="flex flex-col text-center">
+                      <h1 className="text-xl font-bold">Welcome back</h1>
+                      <p className="text-sm text-muted-foreground text-balance">
+                        Login to your account
                       </p>
-
-                      {/* Tabs */}
-                      <div className="w-full grid grid-cols-2 gap-4 mb-2 mt-4">
-                        <Button
-                          onClick={() => setActiveTab("buyer")}
-                          className={`px-4 py-2 text-sm font-medium transition ${
-                            activeTab === "buyer"
-                              ? "bg-primary text-white"
-                              : "bg-muted text-muted-foreground hover:bg-accent"
-                          }`}
-                        >
-                          Buyer
-                        </Button>
-                        <Button
-                          onClick={() => setActiveTab("producer")}
-                          className={`px-4 py-2 text-sm font-medium transition ${
-                            activeTab === "producer"
-                              ? "bg-primary text-white"
-                              : "bg-muted text-muted-foreground hover:bg-accent"
-                          }`}
-                        >
-                          Producer
-                        </Button>
-                      </div>
                     </div>
 
                     <div className="grid gap-3">
@@ -66,8 +67,15 @@ export default function LoginPage() {
                         id="email"
                         type="email"
                         placeholder="m@example.com"
-                        required
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
                       />
+                      {errors.email && (
+                        <p className="text-sm text-red-500">
+                          {errors.email.message}
+                        </p>
+                      )}
                     </div>
 
                     <div className="grid gap-3">
@@ -80,11 +88,26 @@ export default function LoginPage() {
                           Forgot your password?
                         </a>
                       </div>
-                      <Input id="password" type="password" required />
+                      <Input
+                        id="password"
+                        type="password"
+                        {...register("password", {
+                          required: "Password is required",
+                        })}
+                      />
+                      {errors.password && (
+                        <p className="text-sm text-red-500">
+                          {errors.password.message}
+                        </p>
+                      )}
                     </div>
 
-                    <Button type="submit" className="w-full">
-                      Login
+                    <Button
+                      type="submit"
+                      className="w-full"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Logging in..." : "Login"}
                     </Button>
 
                     <div className="text-center text-sm">
